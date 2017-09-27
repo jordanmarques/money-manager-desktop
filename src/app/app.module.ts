@@ -5,9 +5,10 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { APP_ROUTER_PROVIDERS } from './app.routes';
-
 import { TableComponent } from './table/table.component';
 import { MonthlyPageComponent } from './monthly-page/monthly-page.component';
+
+import { BsRootModule } from 'ngx-bootstrap';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { MonthlyPageComponent } from './monthly-page/monthly-page.component';
     BrowserModule,
     FormsModule,
     HttpModule,
-    APP_ROUTER_PROVIDERS
+    APP_ROUTER_PROVIDERS,
+    BsRootModule
   ],
   providers: [],
   bootstrap: [AppComponent]
