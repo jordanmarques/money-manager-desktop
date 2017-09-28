@@ -1,0 +1,13 @@
+<div id="balance-row-table">
+    <table *ngIf="rows.length > 0" class="table table-condensed">
+        <tbody>
+        <tr *ngFor="let operation of rows">
+            <td>{{operation.value}}</td>
+            <td>
+                <button *ngIf="!operation.isPayed" class="btn btn-outline-danger btn-sm">Débiter</button>
+                <button *ngIf="operation.isPayed" class="btn btn-outline-success btn-sm">Re-Créditer</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

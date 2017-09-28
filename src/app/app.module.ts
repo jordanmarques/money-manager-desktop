@@ -5,16 +5,16 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { APP_ROUTER_PROVIDERS } from './app.routes';
-import { TableComponent } from './table/table.component';
 import { MonthlyPageComponent } from './monthly-page/monthly-page.component';
 
 import { BsRootModule } from 'ngx-bootstrap';
+import { BalanceRowTableComponent } from './balance-row-table/balance-row-table.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TableComponent,
-    MonthlyPageComponent
+    MonthlyPageComponent,
+    BalanceRowTableComponent
   ],
   imports: [
     BrowserModule,

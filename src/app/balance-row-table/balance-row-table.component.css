@@ -1,0 +1,7 @@
+button{
+    cursor: pointer;
+}
+
+#balance-row-table{
+    column-count: 2;
+}
