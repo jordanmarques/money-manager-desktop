@@ -1,13 +1,29 @@
-<div id="balance-row-table">
-    <table *ngIf="rows.length > 0" class="table table-condensed">
-        <tbody>
-        <tr *ngFor="let operation of rows">
-            <td>{{operation.value}}</td>
-            <td>
-                <button *ngIf="!operation.isPayed" class="btn btn-outline-danger btn-sm">Débiter</button>
-                <button *ngIf="operation.isPayed" class="btn btn-outline-success btn-sm">Re-Créditer</button>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+<div>
+    <div id="balance-table-container">
+        <table id="balance-table" class="table table-sm" *ngIf="rows.length > 0">
+            <tbody>
+            <tr *ngFor="let row of rows" [ngClass]="{'table-success': row.isPayed}">
+                <td>{{row.value}}</td>
+                <td>
+                    <div class="pull-right">
+                        <button *ngIf="!row.isPayed" class="btn btn-outline-success btn-sm" (click)="debit(row)">
+                            Payer
+                        </button>
+                        <button id="cancel-payement-btn" *ngIf="row.isPayed" class="btn btn-warning btn-sm" (click)="credit(row)">
+                            Annuler
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="add-row-container" class="col-md-12">
+        <button id="add-row-button" class="btn btn-outline-dark btn-sm pull-right faa-parent animated-hover">
+            <i class="fa fa-plus faa-shake animated-hover" aria-label="true"></i>
+        </button>
+    </div>
+    <div id="balance-container" class="text-center col-md-12">
+        <h1>{{balance}}</h1>
+    </div>
 </div>

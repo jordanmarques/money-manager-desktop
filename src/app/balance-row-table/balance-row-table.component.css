@@ -2,6 +2,25 @@ button{
     cursor: pointer;
 }
 
-#balance-row-table{
-    column-count: 2;
+#balance-table-container{
+}
+
+#balance-table{
+    margin-bottom: 0
+}
+
+#balance-container{
+    margin: 25px
+}
+
+#add-row-container{
+    margin: 10px
+}
+
+#add-row-button{
+    border-radius: 20px;
+}
+
+#cancel-payement-btn{
+    opacity: 0.5;
 }

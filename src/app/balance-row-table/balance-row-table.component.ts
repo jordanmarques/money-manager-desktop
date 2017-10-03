@@ -7,28 +7,36 @@ import {Row} from '../row';
   templateUrl: './balance-row-table.component.html',
   styleUrls: ['./balance-row-table.component.css']
 })
-export class BalanceRowTableComponent implements OnInit, OnChanges {
+export class BalanceRowTableComponent implements OnChanges {
 
   @Input() month: Month;
-  @Output() balanceEmited = new EventEmitter();
 
   private balance: number;
   private rows: Row[];
 
   constructor() { }
 
-  ngOnInit() {
-    console.log(this.rows);
-  }
-
   ngOnChanges(changes: SimpleChanges): void {
-    this.updateTableValues(changes.month.currentValue);
+    this.loadTableValues(changes.month.currentValue);
   }
 
-  // debit
+  private debit(row: Row) {
+    this.updateBalance(row, (a: number, b: number) => a - b);
+  }
 
-  private updateTableValues(month: Month) {
+  private credit(row: Row) {
+    this.updateBalance(row, (a: number, b: number) => a + b);
+  }
+
+  private updateBalance(row: Row, fn: (a: number, b: number) => number) {
+    this.balance = fn(this.balance, row.value);
+    row.isPayed = !row.isPayed;
+  }
+
+  private loadTableValues(month: Month) {
     this.rows = month.rows;
-    // this.balance =
+    this.balance = month.rows.filter(row => ! row.isPayed)
+                              .map(row => row.value)
+                              .reduce( (a, b) => a + b, 0);
   }
 }

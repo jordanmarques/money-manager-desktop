@@ -13,7 +13,7 @@ export class MonthlyPageComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    const rows = [new Row(123, true), new Row(456, false), new Row(123, true), new Row(456, false), new Row(123, true), new Row(456, false), new Row(123, true), new Row(456, false)];
+    const rows = [new Row(456, false), new Row(123, true), new Row(456, false), new Row(123, true), new Row(456, false)];
     this.month = new Month(rows);
   }
 
