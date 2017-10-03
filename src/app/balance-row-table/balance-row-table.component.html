@@ -3,13 +3,14 @@
         <table id="balance-table" class="table table-sm" *ngIf="rows.length > 0">
             <tbody>
             <tr *ngFor="let row of rows" [ngClass]="{'table-success': row.isPayed}">
-                <td>{{row.value}}</td>
+                <td>{{row.value}} €</td>
                 <td>
                     <div class="pull-right">
                         <button *ngIf="!row.isPayed" class="btn btn-outline-success btn-sm" (click)="debit(row)">
                             Payer
                         </button>
-                        <button id="cancel-payement-btn" *ngIf="row.isPayed" class="btn btn-warning btn-sm" (click)="credit(row)">
+                        <button id="cancel-payement-btn" *ngIf="row.isPayed" class="btn btn-warning btn-sm"
+                                (click)="credit(row)">
                             Annuler
                         </button>
                     </div>
@@ -19,11 +20,32 @@
         </table>
     </div>
     <div id="add-row-container" class="col-md-12">
-        <button id="add-row-button" class="btn btn-outline-dark btn-sm pull-right faa-parent animated-hover">
+        <button id="add-row-button" type="button"
+                class="btn btn-outline-dark btn-sm pull-right faa-parent animated-hover" (click)="openModal(template)">
             <i class="fa fa-plus faa-shake animated-hover" aria-label="true"></i>
         </button>
     </div>
     <div id="balance-container" class="text-center col-md-12">
-        <h1>{{balance}}</h1>
+        <h1>{{balance}} €</h1>
     </div>
 </div>
+
+<template #template>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Ajouter une valeur a la liste</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="input-group">
+            <input type="number" class="form-control" placeholder="€€€" [(ngModel)]="newValue">
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-success" (click)="addToList(newValue)">Ajouter</button>
+    </div>
+</template>
+
+
+
