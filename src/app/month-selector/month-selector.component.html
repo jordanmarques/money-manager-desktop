@@ -1,5 +1,42 @@
-<div>
+<div class="input-group">
     <select class="form-control" [(ngModel)]="selectedMonth" (click)="emitMonth(selectedMonth)">
         <option *ngFor="let month of months" [ngValue]="month">{{month.date | date: 'MMM y'}}</option>
     </select>
+    &nbsp;
+    <button class="btn btn-outline-dark btn-xs" (click)="openModal(template)">Ajouter un mois</button>
 </div>
+
+<template #template>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Ajouter un Mois</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="addMonthModal.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <table class="width-100">
+            <tr class="col-xs-12">
+                <td class="col-xs-6">
+                    <button class="btn btn-primary width-100" (click)="addEmptyMonth()">Ajouter un mois vide</button>
+                </td>
+                <td class="col-xs-6"></td>
+            </tr>
+            <tr class="col-xs-12">
+                <td class="col-xs-6">
+                    <span>A partir du mois de :</span>
+                    <select class="form-control" [(ngModel)]="monthToCopy">
+                        <option *ngFor="let month of months" [ngValue]="month">{{month.date | date: 'MMM y'}}</option>
+                    </select>
+                </td>
+                <td class="col-xs-6">
+                    <button class="btn btn-primary width-100" (click)="copyFromExistingMonth(monthToCopy)"
+                            [disabled]="!monthToCopy">
+                        Ajouter
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="modal-footer">
+    </div>
+</template>

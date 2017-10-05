@@ -19,8 +19,7 @@ export class BalanceRowTableComponent implements OnChanges, OnInit {
     private newRowForm: FormGroup;
     public newRowModal: BsModalRef;
 
-    constructor(private modalService: BsModalService) {
-    }
+    constructor(private modalService: BsModalService) {}
 
     ngOnInit(): void {
         this.newRowForm = new FormGroup({

@@ -1,9 +1,9 @@
-<div *ngIf="rows.length > 0">
+<div>
     <div id="balance-table-container">
-        <div class="col-md-12 text-center">
+        <div class="col-md-12 text-center" *ngIf="date">
             <h1> {{date | date: 'MMMM y'}}</h1>
         </div>
-        <table id="balance-table" class="table table-sm">
+        <table id="balance-table" class="table table-sm" *ngIf="rows.length > 0">
             <tbody>
             <tr *ngFor="let row of rows" [ngClass]="{'table-success': row.isPayed}">
                 <td>
@@ -29,13 +29,13 @@
             </tbody>
         </table>
     </div>
-    <div id="add-row-container" class="col-md-12">
+    <div id="add-row-container" class="col-md-12" *ngIf="date">
         <button id="add-row-button" type="button"
                 class="btn btn-outline-dark btn-sm pull-right faa-parent animated-hover" (click)="openModal(template)">
             <i class="fa fa-plus faa-shake animated-hover" aria-label="true"></i>
         </button>
     </div>
-    <div id="balance-container" class="text-center col-md-12">
+    <div id="balance-container" class="text-center col-md-12" *ngIf="rows.length > 0">
         <h3>{{balance}} €</h3>
     </div>
 </div>
