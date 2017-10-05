@@ -4,7 +4,8 @@ export class Month {
     date: Date;
     rows: Row[];
 
-    constructor(rows: Row[]) {
+    constructor(date: Date, rows: Row[]) {
+        this.date = date;
         this.rows = rows;
     }
 }

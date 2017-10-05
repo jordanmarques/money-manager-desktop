@@ -20,7 +20,7 @@ export class MonthlyPageComponent implements OnInit {
       new Row(123, 'test1', true),
       new Row(456, 'test1', false)
     ];
-    this.month = new Month(rows);
+    this.month = new Month(new Date('2017-02-21'), rows);
   }
 
 }

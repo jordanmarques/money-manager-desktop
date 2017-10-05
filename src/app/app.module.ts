@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import {CommonModule} from '@angular/common';
 
 
 import { AppComponent } from './app.component';
@@ -22,10 +23,13 @@ import { BalanceRowTableComponent } from './balance-row-table/balance-row-table.
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
+    CommonModule,
     APP_ROUTER_PROVIDERS,
     BsRootModule
   ],
-  providers: [],
+  providers: [
+      { provide: LOCALE_ID, useValue: 'fr-FR' }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

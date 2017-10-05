@@ -1,5 +1,8 @@
 <div>
     <div id="balance-table-container">
+        <div class="col-md-12 text-center">
+            <h1> {{date | date: 'MMMM y'}}</h1>
+        </div>
         <table id="balance-table" class="table table-sm" *ngIf="rows.length > 0">
             <tbody>
             <tr *ngFor="let row of rows" [ngClass]="{'table-success': row.isPayed}">
@@ -33,7 +36,7 @@
         </button>
     </div>
     <div id="balance-container" class="text-center col-md-12">
-        <h1>{{balance}} €</h1>
+        <h3>{{balance}} €</h3>
     </div>
 </div>
 

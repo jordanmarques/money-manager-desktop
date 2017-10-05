@@ -13,6 +13,7 @@ export class BalanceRowTableComponent implements OnChanges, OnInit {
     @Input() month: Month;
 
     private balance: number;
+    private date: Date;
     private rows: Row[];
 
     private newRowForm: FormGroup;
@@ -54,6 +55,7 @@ export class BalanceRowTableComponent implements OnChanges, OnInit {
 
     private loadTableValues(month: Month) {
         this.rows = month.rows;
+        this.date = month.date;
         this.balance = this.computeBalance(month.rows);
     }
 
