@@ -4,13 +4,14 @@
             <tbody>
             <tr *ngFor="let row of rows" [ngClass]="{'table-success': row.isPayed}">
                 <td>{{row.value}} €</td>
+                <td>{{row.label}}</td>
                 <td>
                     <div class="pull-right">
-                        <button *ngIf="!row.isPayed" class="btn btn-outline-success btn-sm" (click)="debit(row)">
+                        <button *ngIf="!row.isPayed" class="btn btn-outline-success btn-sm" (click)="pay(row)">
                             Payer
                         </button>
                         <button id="cancel-payement-btn" *ngIf="row.isPayed" class="btn btn-warning btn-sm"
-                                (click)="credit(row)">
+                                (click)="cancel(row)">
                             Annuler
                         </button>
                     </div>
@@ -33,17 +34,18 @@
 <template #template>
     <div class="modal-header">
         <h4 class="modal-title pull-left">Ajouter une valeur a la liste</h4>
-        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="newRowModal.hide()">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="modal-body">
-        <div class="input-group">
-            <input type="number" class="form-control" placeholder="€€€" [(ngModel)]="newValue">
-        </div>
+        <form novalidate [formGroup]="newRowForm">
+            <input type="number" formControlName="value" class="form-control" placeholder="€€€">
+            <input type="text" formControlName="label" class="form-control" placeholder="Libellé">
+        </form>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-success" (click)="addToList(newValue)">Ajouter</button>
+        <button class="btn btn-success" (click)="addToList()" [disabled]="!newRowForm.valid">Ajouter</button>
     </div>
 </template>
 
