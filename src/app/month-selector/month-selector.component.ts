@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, EventEmitter, Output} from '@angular/core';
 import {Month} from '../month';
 import {Row} from 'app/row';
 
@@ -7,9 +7,12 @@ import {Row} from 'app/row';
     templateUrl: './month-selector.component.html',
     styleUrls: ['./month-selector.component.css']
 })
-export class MonthSelectorComponent implements OnInit {
+export class MonthSelectorComponent implements OnInit{
+
+    @Output() monthEmitter = new EventEmitter();
 
     private months: Month[];
+    private selectedMonth: Month;
 
     constructor() {
     }
@@ -22,14 +25,21 @@ export class MonthSelectorComponent implements OnInit {
             new Row(123, 'test1', true),
             new Row(456, 'test1', false)
         ];
-        this.months = [
+        this.months = this.sortByDate([
             new Month(new Date('2015-01-10'), rows),
             new Month(new Date('2014-05-10'), rows),
             new Month(new Date('2017-02-10'), rows),
             new Month(new Date('2017-03-10'), rows),
             new Month(new Date('2017-04-10'), rows),
             new Month(new Date('2017-05-10'), rows)
-        ];
+        ]);
     }
 
+    private emitMonth(month: Month) {
+        this.monthEmitter.emit(month);
+    }
+
+    private sortByDate(months: Month[]): Month[] {
+        return months.sort((month1, month2) => month1.date.getTime() < month2.date.getTime() ? 1 : 0);
+    }
 }

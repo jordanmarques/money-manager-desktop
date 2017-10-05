@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Month} from '../month';
-import {Row} from '../row';
 
 @Component({
   selector: 'app-monthly-page',
@@ -8,6 +7,8 @@ import {Row} from '../row';
   styleUrls: ['./monthly-page.component.css']
 })
 export class MonthlyPageComponent implements OnInit {
+
+
   private month: Month;
 
   constructor() { }
@@ -15,5 +16,4 @@ export class MonthlyPageComponent implements OnInit {
   ngOnInit() {
     this.month = new Month();
   }
-
 }

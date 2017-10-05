@@ -1,9 +1,9 @@
-<div>
+<div *ngIf="rows.length > 0">
     <div id="balance-table-container">
         <div class="col-md-12 text-center">
             <h1> {{date | date: 'MMMM y'}}</h1>
         </div>
-        <table id="balance-table" class="table table-sm" *ngIf="rows.length > 0">
+        <table id="balance-table" class="table table-sm">
             <tbody>
             <tr *ngFor="let row of rows" [ngClass]="{'table-success': row.isPayed}">
                 <td>
