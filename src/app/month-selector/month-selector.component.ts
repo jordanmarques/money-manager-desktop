@@ -18,20 +18,49 @@ export class MonthSelectorComponent implements OnInit{
     }
 
     ngOnInit() {
-        const rows = [
-            new Row(456, 'test1', false),
-            new Row(123, 'test1', true),
-            new Row(456, 'test1', false),
-            new Row(123, 'test1', true),
-            new Row(456, 'test1', false)
-        ];
         this.months = this.sortByDate([
-            new Month(new Date('2015-01-10'), rows),
-            new Month(new Date('2014-05-10'), rows),
-            new Month(new Date('2017-02-10'), rows),
-            new Month(new Date('2017-03-10'), rows),
-            new Month(new Date('2017-04-10'), rows),
-            new Month(new Date('2017-05-10'), rows)
+            new Month(new Date('2015-01-10'), [
+                new Row(456, 'test1', false),
+                new Row(123, 'test1', true),
+                new Row(456, 'test1', false),
+                new Row(123, 'test1', true),
+                new Row(456, 'test1', false)
+            ]),
+            new Month(new Date('2014-05-10'), [
+                new Row(456, 'test1', false),
+                new Row(123, 'test1', true),
+                new Row(456, 'test1', false),
+                new Row(123, 'test1', true),
+                new Row(456, 'test1', false)
+            ]),
+            new Month(new Date('2017-02-10'), [
+                new Row(456, 'test1', false),
+                new Row(123, 'test1', true),
+                new Row(456, 'test1', false),
+                new Row(123, 'test1', true),
+                new Row(456, 'test1', false)
+            ]),
+            new Month(new Date('2017-03-10'), [
+                new Row(456, 'test1', false),
+                new Row(123, 'test1', true),
+                new Row(456, 'test1', false),
+                new Row(123, 'test1', true),
+                new Row(456, 'test1', false)
+            ]),
+            new Month(new Date('2017-04-10'), [
+                new Row(456, 'test1', false),
+                new Row(123, 'test1', true),
+                new Row(456, 'test1', false),
+                new Row(123, 'test1', true),
+                new Row(456, 'test1', false)
+            ]),
+            new Month(new Date('2017-05-10'), [
+                new Row(456, 'test1', false),
+                new Row(123, 'test1', true),
+                new Row(456, 'test1', false),
+                new Row(123, 'test1', true),
+                new Row(456, 'test1', false)
+            ])
         ]);
     }
 

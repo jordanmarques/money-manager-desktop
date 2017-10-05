@@ -1,4 +1,4 @@
 <div>
+    <app-month-selector id="month-selector" (monthEmitter)="month = $event"></app-month-selector>
     <app-balance-row-table id="balance-row-table" [(month)]="month"></app-balance-row-table>
-    <app-month-selector (monthEmitter)="month = $event"></app-month-selector>
 </div>
