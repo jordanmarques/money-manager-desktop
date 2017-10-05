@@ -33,25 +33,23 @@ export class BalanceRowTableComponent implements OnChanges, OnInit {
     }
 
     private pay(row: Row) {
-        this.debit(row);
         row.isPayed = true;
+        this.balance = this.computeBalance(this.rows);
     }
 
     private cancel(row: Row) {
-        this.credit(row);
         row.isPayed = false;
+        this.balance = this.computeBalance(this.rows);
     }
 
-    private debit(row: Row) {
-        this.updateBalance(row, (a: number, b: number) => a - b);
-    }
-
-    private credit(row: Row) {
-        this.updateBalance(row, (a: number, b: number) => a + b);
-    }
-
-    private updateBalance(row: Row, fn: (a: number, b: number) => number) {
-        this.balance = fn(this.balance, row.value);
+    private remove(row: Row) {
+        if (confirm('Supprimer cette valeur ?')) {
+            const index = this.rows.indexOf(row, 0);
+            if (index > -1) {
+                this.rows.splice(index, 1);
+                this.balance = this.computeBalance(this.rows);
+            }
+        }
     }
 
     private loadTableValues(month: Month) {
@@ -65,8 +63,8 @@ export class BalanceRowTableComponent implements OnChanges, OnInit {
         this.newRowForm.patchValue({['value']: null});
         this.newRowForm.patchValue({['label']: null});
 
-        this.credit(row);
         this.rows.push(row);
+        this.balance = this.computeBalance(this.rows);
 
         this.newRowModal.hide();
     }

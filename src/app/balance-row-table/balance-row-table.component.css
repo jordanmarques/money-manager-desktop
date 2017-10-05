@@ -24,3 +24,7 @@ button{
 #cancel-payement-btn{
     opacity: 0.5;
 }
+
+#remove-row-button{
+    float: none;
+}

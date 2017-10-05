@@ -3,7 +3,13 @@
         <table id="balance-table" class="table table-sm" *ngIf="rows.length > 0">
             <tbody>
             <tr *ngFor="let row of rows" [ngClass]="{'table-success': row.isPayed}">
-                <td>{{row.value}} €</td>
+                <td>
+                    <button id="remove-row-button" type="button" class="close pull-left" (click)="remove(row)">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    &nbsp;
+                    <span>{{row.value}} €</span>
+                </td>
                 <td>{{row.label}}</td>
                 <td>
                     <div class="pull-right">
