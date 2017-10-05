@@ -1,0 +1,5 @@
+<div>
+  <select class="form-control">
+    <option *ngFor="let month of months" [value]="mois">{{month.date | date: 'MMM y'}}</option>
+  </select>
+</div>

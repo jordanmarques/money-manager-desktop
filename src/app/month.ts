@@ -4,8 +4,10 @@ export class Month {
     date: Date;
     rows: Row[];
 
-    constructor(date: Date, rows: Row[]) {
-        this.date = date;
-        this.rows = rows;
+    constructor()
+    constructor(date: Date, rows: Row[])
+    constructor(date?: any, rows?: any) {
+        this.date = date || new Date('1970-01-01');
+        this.rows = rows || [];
     }
 }

@@ -11,12 +11,14 @@ import { MonthlyPageComponent } from './monthly-page/monthly-page.component';
 
 import { BsRootModule } from 'ngx-bootstrap';
 import { BalanceRowTableComponent } from './balance-row-table/balance-row-table.component';
+import { MonthSelectorComponent } from './month-selector/month-selector.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MonthlyPageComponent,
-    BalanceRowTableComponent
+    BalanceRowTableComponent,
+    MonthSelectorComponent
   ],
   imports: [
     BrowserModule,
