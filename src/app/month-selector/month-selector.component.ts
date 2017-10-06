@@ -1,68 +1,38 @@
-import {Component, OnInit, EventEmitter, Output, TemplateRef, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, OnInit, EventEmitter, Output, TemplateRef} from '@angular/core';
 import {Month} from '../month';
-import {Row} from 'app/row';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
+import {Database} from 'app/shared/database.service';
 
 @Component({
     selector: 'app-month-selector',
     templateUrl: './month-selector.component.html',
-    styleUrls: ['./month-selector.component.css']
+    styleUrls: ['./month-selector.component.css'],
+    providers: [Database]
 })
 export class MonthSelectorComponent implements OnInit {
     @Output() monthEmitter = new EventEmitter();
 
     private months: Month[];
-
     private selectedMonth: Month;
-    public addMonthModal: BsModalRef;
-    constructor(private modalService: BsModalService) {}
+
+    private addMonthModal: BsModalRef;
+
+    constructor(private modalService: BsModalService, private database: Database) {
+    }
 
     ngOnInit() {
-        this.months = this.sortByDate([
-            new Month(new Date('2015-01-10'), [
-                new Row(456, 'test1', false),
-                new Row(123, 'test1', true),
-                new Row(456, 'test1', false),
-                new Row(123, 'test1', true),
-                new Row(456, 'test1', false)
-            ]),
-            new Month(new Date('2014-05-10'), [
-                new Row(456, 'test1', false),
-                new Row(123, 'test1', true),
-                new Row(456, 'test1', false),
-                new Row(123, 'test1', true),
-                new Row(456, 'test1', false)
-            ]),
-            new Month(new Date('2017-02-10'), [
-                new Row(456, 'test1', false),
-                new Row(123, 'test1', true),
-                new Row(456, 'test1', false),
-                new Row(123, 'test1', true),
-                new Row(456, 'test1', false)
-            ]),
-            new Month(new Date('2017-03-10'), [
-                new Row(456, 'test1', false),
-                new Row(123, 'test1', true),
-                new Row(456, 'test1', false),
-                new Row(123, 'test1', true),
-                new Row(456, 'test1', false)
-            ]),
-            new Month(new Date('2017-04-10'), [
-                new Row(456, 'test1', false),
-                new Row(123, 'test1', true),
-                new Row(456, 'test1', false),
-                new Row(123, 'test1', true),
-                new Row(456, 'test1', false)
-            ]),
-            new Month(new Date('2017-05-10'), [
-                new Row(456, 'test1', false),
-                new Row(123, 'test1', true),
-                new Row(456, 'test1', false),
-                new Row(123, 'test1', true),
-                new Row(456, 'test1', false)
-            ])
-        ]);
-        this.setMonth(this.months[0]);
+        this.months = [new Month( new Date('1970-01-01'), [])];
+        this.database.findAll().then(months => {
+            if (months) {
+                this.months = this.sortByDate(months);
+                this.setMonth(this.months[0]);
+            } else {
+                this.database.insert(new Month(new Date('2017-10-01'), [])).then(month => {
+                    this.months.push(month);
+                });
+                this.setMonth(this.months[0]);
+            }
+        });
     }
 
     private emitMonth(month: Month) {
@@ -79,7 +49,7 @@ export class MonthSelectorComponent implements OnInit {
 
     private copyFromExistingMonth(monthToCopy: Month) {
         const nextMonthDate = this.getNextMonthDate(this.months[0].date);
-        const month = new Month(nextMonthDate, monthToCopy.rows );
+        const month = new Month(nextMonthDate, monthToCopy.rows);
 
         this.months.splice(0, 0, month);
 
@@ -90,7 +60,7 @@ export class MonthSelectorComponent implements OnInit {
 
     private addEmptyMonth() {
         const nextMonthDate = this.getNextMonthDate(this.months[0].date);
-        const month = new Month(nextMonthDate, [] );
+        const month = new Month(nextMonthDate, []);
 
         this.months.splice(0, 0, month);
 

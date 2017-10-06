@@ -53,7 +53,10 @@ export class BalanceRowTableComponent implements OnChanges, OnInit {
     }
 
     private loadTableValues(month: Month) {
-        this.rows = month.rows;
+        if (!month) {
+            return;
+        }
+        this.rows = month.rows ? month.rows : [];
         this.date = month.date;
         this.balance = this.computeBalance(month.rows);
     }

@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import {CommonModule} from '@angular/common';
 
-
 import { AppComponent } from './app.component';
 import { APP_ROUTER_PROVIDERS } from './app.routes';
 import { MonthlyPageComponent } from './monthly-page/monthly-page.component';
@@ -30,7 +29,7 @@ import { MonthSelectorComponent } from './month-selector/month-selector.componen
     BsRootModule
   ],
   providers: [
-      { provide: LOCALE_ID, useValue: 'fr-FR' }
+      { provide: LOCALE_ID, useValue: 'fr-US' }
   ],
   bootstrap: [AppComponent]
 })

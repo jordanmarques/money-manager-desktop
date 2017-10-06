@@ -3,7 +3,7 @@
         <div class="col-md-12 text-center" *ngIf="date">
             <h1> {{date | date: 'MMMM y'}}</h1>
         </div>
-        <table id="balance-table" class="table table-sm" *ngIf="rows.length > 0">
+        <table id="balance-table" class="table table-sm" *ngIf="rows?.length > 0">
             <tbody>
             <tr *ngFor="let row of rows" [ngClass]="{'table-success': row.isPayed}">
                 <td>
@@ -35,7 +35,7 @@
             <i class="fa fa-plus faa-shake animated-hover" aria-label="true"></i>
         </button>
     </div>
-    <div id="balance-container" class="text-center col-md-12" *ngIf="rows.length > 0">
+    <div id="balance-container" class="text-center col-md-12" *ngIf="rows?.length > 0">
         <h3>{{balance}} €</h3>
     </div>
 </div>
