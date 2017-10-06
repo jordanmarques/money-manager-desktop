@@ -14,29 +14,30 @@
         </button>
     </div>
     <div class="modal-body">
-        <table class="width-100">
-            <tr class="col-xs-12">
-                <td class="col-xs-6">
-                    <button class="btn btn-primary width-100" (click)="addEmptyMonth()">Ajouter un mois vide</button>
-                </td>
-                <td class="col-xs-6"></td>
-            </tr>
-            <tr class="col-xs-12">
-                <td class="col-xs-6">
-                    <span>A partir du mois de :</span>
-                    <select class="form-control" [(ngModel)]="monthToCopy">
-                        <option *ngFor="let month of months" [ngValue]="month">{{month.date | date: 'MMM y'}}</option>
-                    </select>
-                </td>
-                <td class="col-xs-6">
-                    <button class="btn btn-primary width-100" (click)="copyFromExistingMonth(monthToCopy)"
+        <div class="row">
+            <div class="col-md-12 ">
+                <button class="btn btn-primary fill-space" (click)="addEmptyMonth()">Ajouter un mois vide</button>
+            </div>
+        </div>
+        <div class="margin-20 text-center">
+            <span>
+                <h3>ou</h3>
+            </span>
+        </div>
+        <div class="row">
+            <span class="col-md-4 padding-right-0">Copier le mois de :</span>
+            <div class="input-group col-md-8">
+                <select class="form-control col-md-9 width-auto" [(ngModel)]="monthToCopy">
+                    <option *ngFor="let month of months" [ngValue]="month">{{month.date | date: 'MMM y'}}</option>
+                </select>
+                <span class="input-group-btn">
+                    <button class="btn btn-primary"
+                            (click)="copyFromExistingMonth(monthToCopy)"
                             [disabled]="!monthToCopy">
                         Ajouter
                     </button>
-                </td>
-            </tr>
-        </table>
-    </div>
-    <div class="modal-footer">
+                </span>
+            </div>
+        </div>
     </div>
 </template>

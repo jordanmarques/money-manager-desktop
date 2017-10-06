@@ -1,3 +1,15 @@
-.width-100{
+.fill-space{
     width: 100%;
+}
+
+.padding-right-0{
+    padding-right: 0;
+}
+
+.width-auto{
+    width: auto;
+}
+
+.margin-20{
+    margin: 20px;
 }
