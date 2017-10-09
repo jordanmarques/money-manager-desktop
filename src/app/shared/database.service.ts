@@ -1,24 +1,35 @@
 import {Injectable} from '@angular/core';
-import {Month} from "../month";
+import {Month} from '../month';
 
 declare var require: any;
 
 const Datastore = require('nedb');
-const dataB = 'database.db';
 
 @Injectable()
 export class Database {
-    public db: any;
+    public months: any;
 
     constructor () {
-        this.db = new Datastore({
-            filename: dataB ,
+        this.months = new Datastore({
+            filename: 'months.db' ,
             autoload: true });
+    }
+
+    dropAll() {
+        return new Promise<Month>((resolve, reject) => {
+            return this.months.remove({}, { multi: true }, ((err: any, newItem: any) => {
+                if ( err ) {
+                    reject(err);
+                } else {
+                    resolve(newItem);
+                }
+            }));
+        });
     }
 
     insert(item: Month) {
         return new Promise<Month>((resolve, reject) => {
-            return this.db.insert(item, ((err: any, newItem: Month) => {
+            return this.months.insert(item, ((err: any, newItem: any) => {
                 if ( err ) {
                     reject(err);
                 } else {
@@ -30,10 +41,11 @@ export class Database {
 
     findAll() {
         return new Promise<Month[]>((resolve, reject) => {
-            return this.db.find({}, ((err: any, items: any) => {
+            return this.months.find({}, ((err: any, items: any) => {
                 if ( err ) {
                     reject(err);
                 } else {
+                    console.log(items);
                     resolve(items);
                 }
             }));

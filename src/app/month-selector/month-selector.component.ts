@@ -21,16 +21,17 @@ export class MonthSelectorComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.months = [new Month( new Date('1970-01-01'), [])];
+        this.months = [];
         this.database.findAll().then(months => {
-            if (months) {
+            if (months && months.length !== 0) {
                 this.months = this.sortByDate(months);
                 this.setMonth(this.months[0]);
             } else {
                 this.database.insert(new Month(new Date('2017-10-01'), [])).then(month => {
                     this.months.push(month);
+                    this.setMonth(this.months[0]);
                 });
-                this.setMonth(this.months[0]);
+
             }
         });
     }
@@ -51,9 +52,10 @@ export class MonthSelectorComponent implements OnInit {
         const nextMonthDate = this.getNextMonthDate(this.months[0].date);
         const month = new Month(nextMonthDate, monthToCopy.rows);
 
-        this.months.splice(0, 0, month);
-
-        this.setMonth(month);
+        this.database.insert(month).then(monthSaved => {
+            this.months.splice(0, 0, monthSaved);
+            this.setMonth(month);
+        });
 
         this.addMonthModal.hide();
     }
@@ -62,9 +64,10 @@ export class MonthSelectorComponent implements OnInit {
         const nextMonthDate = this.getNextMonthDate(this.months[0].date);
         const month = new Month(nextMonthDate, []);
 
-        this.months.splice(0, 0, month);
-
-        this.setMonth(month);
+        this.database.insert(month).then(monthSaved => {
+            this.months.splice(0, 0, monthSaved);
+            this.setMonth(month);
+        });
 
         this.addMonthModal.hide();
     }
