@@ -39,6 +39,18 @@ export class Database {
         });
     }
 
+    update(item: Month) {
+        return new Promise<Month>((resolve, reject) => {
+            return this.months.update({date: item.date}, item, ((err: any, newItem: any) => {
+                if ( err ) {
+                    reject(err);
+                } else {
+                    resolve(newItem);
+                }
+            }));
+        });
+    }
+
     findAll() {
         return new Promise<Month[]>((resolve, reject) => {
             return this.months.find({}, ((err: any, items: any) => {

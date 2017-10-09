@@ -3,11 +3,13 @@ import {Month} from '../month';
 import {Row} from '../row';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Database} from '../shared/database.service';
 
 @Component({
     selector: 'app-balance-row-table',
     templateUrl: './balance-row-table.component.html',
-    styleUrls: ['./balance-row-table.component.css']
+    styleUrls: ['./balance-row-table.component.css'],
+    providers: [Database]
 })
 export class BalanceRowTableComponent implements OnChanges, OnInit {
     @Input() month: Month;
@@ -18,7 +20,7 @@ export class BalanceRowTableComponent implements OnChanges, OnInit {
     private newRowForm: FormGroup;
     public newRowModal: BsModalRef;
 
-    constructor(private modalService: BsModalService) {}
+    constructor(private modalService: BsModalService, private database: Database) {}
 
     ngOnInit(): void {
         this.newRowForm = new FormGroup({
@@ -46,6 +48,7 @@ export class BalanceRowTableComponent implements OnChanges, OnInit {
             const index = this.displayedMonth.rows.indexOf(row, 0);
             if (index > -1) {
                 this.displayedMonth.rows.splice(index, 1);
+                this.database.update(this.displayedMonth);
                 this.balance = this.computeBalance(this.displayedMonth.rows);
             }
         }
@@ -66,6 +69,7 @@ export class BalanceRowTableComponent implements OnChanges, OnInit {
         this.newRowForm.patchValue({['label']: null});
 
         this.displayedMonth.rows.push(row);
+        this.database.update(this.displayedMonth);
         this.balance = this.computeBalance(this.displayedMonth.rows);
 
         this.newRowModal.hide();
