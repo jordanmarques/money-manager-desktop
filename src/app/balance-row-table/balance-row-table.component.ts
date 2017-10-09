@@ -1,8 +1,8 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, TemplateRef} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges, TemplateRef} from '@angular/core';
 import {Month} from '../month';
 import {Row} from '../row';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
     selector: 'app-balance-row-table',
@@ -13,8 +13,7 @@ export class BalanceRowTableComponent implements OnChanges, OnInit {
     @Input() month: Month;
 
     private balance: number;
-    private date: Date;
-    private rows: Row[];
+    private displayedMonth: Month;
 
     private newRowForm: FormGroup;
     public newRowModal: BsModalRef;
@@ -34,20 +33,20 @@ export class BalanceRowTableComponent implements OnChanges, OnInit {
 
     private pay(row: Row) {
         row.isPayed = true;
-        this.balance = this.computeBalance(this.rows);
+        this.balance = this.computeBalance(this.displayedMonth.rows);
     }
 
     private cancel(row: Row) {
         row.isPayed = false;
-        this.balance = this.computeBalance(this.rows);
+        this.balance = this.computeBalance(this.displayedMonth.rows);
     }
 
     private remove(row: Row) {
         if (confirm('Supprimer cette valeur ?')) {
-            const index = this.rows.indexOf(row, 0);
+            const index = this.displayedMonth.rows.indexOf(row, 0);
             if (index > -1) {
-                this.rows.splice(index, 1);
-                this.balance = this.computeBalance(this.rows);
+                this.displayedMonth.rows.splice(index, 1);
+                this.balance = this.computeBalance(this.displayedMonth.rows);
             }
         }
     }
@@ -56,9 +55,8 @@ export class BalanceRowTableComponent implements OnChanges, OnInit {
         if (!month) {
             return;
         }
-        this.rows = month.rows ? month.rows : [];
-        this.date = month.date;
-        this.balance = this.computeBalance(month.rows);
+        this.displayedMonth = month;
+        this.balance = this.computeBalance(this.displayedMonth.rows);
     }
 
     private addToList() {
@@ -67,8 +65,8 @@ export class BalanceRowTableComponent implements OnChanges, OnInit {
         this.newRowForm.patchValue({['value']: null});
         this.newRowForm.patchValue({['label']: null});
 
-        this.rows.push(row);
-        this.balance = this.computeBalance(this.rows);
+        this.displayedMonth.rows.push(row);
+        this.balance = this.computeBalance(this.displayedMonth.rows);
 
         this.newRowModal.hide();
     }
