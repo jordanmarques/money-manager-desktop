@@ -41,7 +41,7 @@ export class MonthSelectorComponent implements OnInit {
     }
 
     private sortByDate(months: Month[]): Month[] {
-        return months.sort((month1, month2) => month1.date.getTime() < month2.date.getTime() ? 1 : 0);
+        return months.sort((month1, month2) => month2.date.getTime() - month1.date.getTime());
     }
 
     private openModal(template: TemplateRef<any>) {
@@ -52,24 +52,22 @@ export class MonthSelectorComponent implements OnInit {
         const nextMonthDate = this.getNextMonthDate(this.months[0].date);
         const month = new Month(nextMonthDate, monthToCopy.rows);
 
-        this.database.insert(month).then(monthSaved => {
+        this.database.update(month).then(monthSaved => {
             this.months.splice(0, 0, monthSaved);
-            this.setMonth(month);
+            this.setMonth(monthSaved);
+            this.addMonthModal.hide();
         });
-
-        this.addMonthModal.hide();
     }
 
     private addEmptyMonth() {
         const nextMonthDate = this.getNextMonthDate(this.months[0].date);
         const month = new Month(nextMonthDate, []);
 
-        this.database.insert(month).then(monthSaved => {
+        this.database.update(month).then(monthSaved => {
             this.months.splice(0, 0, monthSaved);
-            this.setMonth(month);
+            this.setMonth(monthSaved);
+            this.addMonthModal.hide();
         });
-
-        this.addMonthModal.hide();
     }
 
     private getNextMonthDate(date: Date): Date {

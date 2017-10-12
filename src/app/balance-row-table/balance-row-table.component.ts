@@ -35,11 +35,13 @@ export class BalanceRowTableComponent implements OnChanges, OnInit {
 
     private pay(row: Row) {
         row.isPayed = true;
+        this.database.update(this.displayedMonth);
         this.balance = this.computeBalance(this.displayedMonth.rows);
     }
 
     private cancel(row: Row) {
         row.isPayed = false;
+        this.database.update(this.displayedMonth);
         this.balance = this.computeBalance(this.displayedMonth.rows);
     }
 

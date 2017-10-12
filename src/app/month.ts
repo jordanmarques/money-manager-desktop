@@ -1,6 +1,7 @@
 import {Row} from './row';
 
 export class Month {
+    _id: any;
     date: Date;
     rows: Row[];
 
