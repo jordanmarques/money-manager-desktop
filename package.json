@@ -5,6 +5,8 @@
   "angular-cli": {},
   "scripts": {
     "build-electron": "ng build --base-href . && cp src/electron/* dist",
+    "package-linux": "electron-packager . money-manager-desktop --platform linux --arch x64 --out dist/",
+    "installer-deb64": "electron-installer-debian --src dist/money-manager-desktop-linux-x64/ --dest dist/installers/ --arch amd64 --config electron-installer-config.json",
     "start": "npm run build-electron && electron dist",
     "test": "ng test",
     "lint": "ng lint",
@@ -37,6 +39,8 @@
     "@types/node": "~6.0.60",
     "codelyzer": "~2.0.0",
     "electron": "1.6.13",
+    "electron-installer-debian": "^0.6.0",
+    "electron-packager": "^9.1.0",
     "jasmine-core": "~2.5.2",
     "jasmine-spec-reporter": "~3.2.0",
     "karma": "~1.4.1",
