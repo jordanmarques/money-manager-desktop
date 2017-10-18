@@ -5,13 +5,12 @@ install:
   - npm install
 deploy:
   provider: releases
-    user: $GIT_USERNAME
-    password: $GIT_PASSWORD
-    file: "/dist/installers/money-manager-desktop_0.0.0_amd64.deb"
-    skip_cleanup: true
-    branches:
-        only:
-        - master
-        - /^v\d+(\.\d+)+$/
-    on:
-      tags: true
+  user: $GIT_USERNAME
+  password: $GIT_PASSWORD
+  file: "/dist/installers/money-manager-desktop_0.0.0_amd64.deb"
+  skip_cleanup: true
+  branches:
+      only:
+      - /^v\d+(\.\d+)+$/
+  on:
+    tags: true
