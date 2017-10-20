@@ -23,7 +23,6 @@
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
     "angular2-fontawesome": "^0.9.3",
-    "bootstrap": "^4.0.0-alpha.6",
     "core-js": "^2.4.1",
     "font-awesome": "^4.7.0",
     "font-awesome-animation": "^0.1.0",
@@ -53,5 +52,16 @@
     "ts-node": "~2.0.0",
     "tslint": "~4.5.0",
     "typescript": "~2.2.0"
-  }
+  },
+  "description": "This Angular 2 and Electron sample app is a simple image calculator that lets users drop images in and find their total size.",
+  "main": "karma.conf.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jordanmarques/money-manager-desktop.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/jordanmarques/money-manager-desktop/issues"
+  },
+  "homepage": "https://github.com/jordanmarques/money-manager-desktop#readme"
 }
