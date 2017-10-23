@@ -14,3 +14,7 @@ deploy:
       - /^v\d+(\.\d+)+$/
   on:
     tags: true
+after_success:
+  - npm build-electron
+  - npm package-linux
+  - npm installer-deb64
