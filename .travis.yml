@@ -15,6 +15,6 @@ deploy:
   on:
     tags: true
 after_success:
-  - npm build-electron
-  - npm package-linux
-  - npm installer-deb64
+  - npm run build-electron
+  - npm run package-linux
+  - npm run installer-deb64
